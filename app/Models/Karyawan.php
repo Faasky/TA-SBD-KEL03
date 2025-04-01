@@ -11,8 +11,8 @@ class Karyawan extends Authenticatable
 {
     // Hapus HasApiTokens dari sini
     use HasFactory, Notifiable;
-    
-    protected $primaryKey = 'id_karyawan';
+    protected $table = 'karyawans'; 
+    protected $primaryKey = 'id_karyawan'; // Primary Key yang bena
     protected $fillable = [
         'nama', 
         'departemen', 
