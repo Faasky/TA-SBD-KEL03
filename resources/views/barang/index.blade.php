@@ -14,11 +14,11 @@
         </div>
 
         <!-- Search & Filter -->
-        <form method="GET" action="{{ route('barang.index') }}" class="mb-4 flex space-x-2">
+        <form method="GET" action="{{ route('barang.index') }}" class="mb-4 flex flex-col gap-2 sm:flex-row sm:space-x-2">
             <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari Barang..."
-                class="border p-2 rounded w-1/3">
-            
-            <select name="kategori_id" class="border p-2 rounded">
+                class="border p-2 rounded w-full sm:w-1/3">
+
+            <select name="kategori_id" class="border p-2 rounded w-full sm:w-auto">
                 <option value="">Semua Kategori</option>
                 @foreach($kategoris as $kategori)
                     <option value="{{ $kategori->id_kategori }}" {{ request('kategori_id') == $kategori->id_kategori ? 'selected' : '' }}>
@@ -27,19 +27,21 @@
                 @endforeach
             </select>
 
-            <select name="status" class="border p-2 rounded">
+            <select name="status" class="border p-2 rounded w-full sm:w-auto">
                 <option value="">Semua Status</option>
                 <option value="tersedia" {{ request('status') == 'tersedia' ? 'selected' : '' }}>Tersedia</option>
                 <option value="dipinjam" {{ request('status') == 'dipinjam' ? 'selected' : '' }}>Dipinjam</option>
                 <option value="rusak" {{ request('status') == 'rusak' ? 'selected' : '' }}>Rusak</option>
             </select>
 
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Filter</button>
-            <a href="{{ route('barang.index') }}" class="bg-gray-300 text-black px-4 py-2 rounded">Reset</a>
+            <div class="flex gap-2">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Filter</button>
+                <a href="{{ route('barang.index') }}" class="bg-gray-300 text-black px-4 py-2 rounded">Reset</a>
+            </div>
         </form>
 
         <!-- Tabel Barang -->
-        <div class="bg-white shadow-md rounded-lg p-6">
+        <div class="bg-white shadow-md rounded-lg p-6 overflow-x-auto">
             <table class="w-full border-collapse border border-gray-300">
                 <thead>
                     <tr class="bg-gray-200">

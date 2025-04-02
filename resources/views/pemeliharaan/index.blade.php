@@ -6,16 +6,14 @@
 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
     <h1 class="text-3xl font-bold mb-4">Manajemen Pemeliharaan</h1>
 
-    <!-- Tombol Tambah Pemeliharaan -->
     <div class="mb-4">
         <a href="{{ route('pemeliharaan.create') }}" class="bg-green-500 text-white px-4 py-2 rounded">
             + Tambah Pemeliharaan
         </a>
     </div>
 
-    <!-- Tabel Pemeliharaan -->
-    <div class="bg-white shadow-md rounded-lg p-6">
-        <table class="w-full border-collapse border border-gray-300">
+    <div class="bg-white shadow-md rounded-lg p-6 overflow-x-auto">
+        <table class="min-w-full border-collapse border border-gray-300">
             <thead>
                 <tr class="bg-gray-200">
                     <th class="border px-4 py-2">No</th>
@@ -62,8 +60,6 @@
                 @endforelse
             </tbody>
         </table>
-
-        <!-- Pagination -->
         <div class="mt-4">
             {{ $pemeliharaans->links() }}
         </div>

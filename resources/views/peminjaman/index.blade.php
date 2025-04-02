@@ -14,7 +14,7 @@
     </div>
 
     <!-- Tabel Peminjaman -->
-    <div class="bg-white shadow-md rounded-lg p-6">
+    <div class="bg-white shadow-md rounded-lg p-6 overflow-x-auto">
         <table class="w-full border-collapse border border-gray-300">
             <thead>
                 <tr class="bg-gray-200">
@@ -44,10 +44,6 @@
                         <span class="bg-green-500 text-white px-2 py-1 rounded">Dikembalikan</span>
                         @endif
                     </td>
-                    <td class="border px-4 py-2">
-                        {{ optional($peminjaman->karyawan)->nama_karyawan ?? 'Tidak Ada' }}
-                    </td>
-
                     <td class="border px-4 py-2 space-x-2">
                         <a href="{{ route('peminjaman.edit', $peminjaman->id_peminjaman) }}" class="text-blue-500">Edit</a>
                         <form action="{{ route('peminjaman.destroy', $peminjaman->id_peminjaman) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus peminjaman ini?');">
@@ -55,7 +51,6 @@
                             @method('DELETE')
                             <button type="submit" class="text-red-500">Hapus</button>
                         </form>
-
                     </td>
                 </tr>
                 @empty
