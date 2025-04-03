@@ -32,6 +32,8 @@
                         <a href="{{ route('dashboard') }}" class="@if(request()->routeIs('dashboard')) bg-blue-800 @endif text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
                             Dashboard
                         </a>
+                        
+                        @if(auth()->user() && auth()->user()->role === 'admin')
                         <a href="{{ route('barang.index') }}" class="@if(request()->routeIs('barang.*')) bg-blue-800 @endif text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
                             Manajemen Barang
                         </a>
@@ -44,7 +46,6 @@
                         <a href="{{ route('pemeliharaan.index') }}" class="@if(request()->routeIs('pemeliharaan.*')) bg-blue-800 @endif text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
                             Pemeliharaan
                         </a>
-                        @if(auth()->user() && auth()->user()->role === 'admin')
                         <a href="{{ route('karyawan.index') }}" class="@if(request()->routeIs('karyawan.*')) bg-blue-800 @endif text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
                             Manajemen Karyawan
                         </a>
@@ -74,6 +75,8 @@
                         <a href="{{ route('dashboard') }}" class="@if(request()->routeIs('dashboard')) bg-blue-800 @endif text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                             Dashboard
                         </a>
+                        
+                        @if(auth()->user() && auth()->user()->role === 'admin')
                         <a href="{{ route('barang.index') }}" class="@if(request()->routeIs('barang.*')) bg-blue-800 @endif text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                             Manajemen Barang
                         </a>
@@ -86,7 +89,6 @@
                         <a href="{{ route('pemeliharaan.index') }}" class="@if(request()->routeIs('pemeliharaan.*')) bg-blue-800 @endif text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                             Pemeliharaan
                         </a>
-                        @if(auth()->user() && auth()->user()->role === 'admin')
                         <a href="{{ route('karyawan.index') }}" class="@if(request()->routeIs('karyawan.*')) bg-blue-800 @endif text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                             Manajemen Karyawan
                         </a>

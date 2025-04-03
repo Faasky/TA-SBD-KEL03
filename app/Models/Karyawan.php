@@ -20,7 +20,7 @@ class Karyawan extends Authenticatable
         'password', 
         'role', 
         'tanggal_bergabung',
-        'is_deleted'
+        'is_deleted',
     ];
     
     protected $hidden = [

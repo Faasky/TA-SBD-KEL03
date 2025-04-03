@@ -47,10 +47,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/barang/{barang}/soft-delete', [BarangController::class, 'softDelete'])->name('barang.soft-delete');
     
     // Karyawan (untuk admin)
-    Route::middleware('role:admin')->group(function () {
         Route::resource('karyawan', KaryawanController::class);
         Route::put('/karyawan/{karyawan}/soft-delete', [KaryawanController::class, 'softDelete'])->name('karyawan.soft-delete');
-    });
     
     // Peminjaman
     Route::resource('peminjaman', PeminjamanController::class);
@@ -59,4 +57,5 @@ Route::middleware('auth')->group(function () {
     // Pemeliharaan
     Route::resource('pemeliharaan', PemeliharaanController::class);
     Route::put('/pemeliharaan/{pemeliharaan}/soft-delete', [PemeliharaanController::class, 'softDelete'])->name('pemeliharaan.soft-delete');
+
 });
