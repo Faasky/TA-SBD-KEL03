@@ -32,6 +32,9 @@
                         <a href="{{ route('dashboard') }}" class="@if(request()->routeIs('dashboard')) bg-blue-800 @endif text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
                             Dashboard
                         </a>
+                        <a href="{{ route('pinjam_barang.index') }}" class="@if(request()->routeIs('pinjam_barang.*')) bg-blue-800 @endif text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
+                            Pinjam Barang
+                        </a>
                         
                         @if(auth()->user() && auth()->user()->role === 'admin')
                         <a href="{{ route('barang.index') }}" class="@if(request()->routeIs('barang.*')) bg-blue-800 @endif text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
@@ -75,7 +78,9 @@
                         <a href="{{ route('dashboard') }}" class="@if(request()->routeIs('dashboard')) bg-blue-800 @endif text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                             Dashboard
                         </a>
-                        
+                        <a href="{{ route('pinjam_barang.index') }}" class="@if(request()->routeIs('pinjam_barang.*')) bg-blue-800 @endif text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
+                            Pinjam Barang
+                        </a>
                         @if(auth()->user() && auth()->user()->role === 'admin')
                         <a href="{{ route('barang.index') }}" class="@if(request()->routeIs('barang.*')) bg-blue-800 @endif text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                             Manajemen Barang

@@ -128,12 +128,13 @@
                             </div>
                             @endforeach
                         </div>
-                        
+                        @if(auth()->user() && auth()->user()->role === 'admin')
                         <div class="mt-4">
                             <a href="{{ route('peminjaman.index') }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
                                 Lihat Semua &rarr;
                             </a>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

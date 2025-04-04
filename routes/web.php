@@ -8,6 +8,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PemeliharaanController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\PinjamBarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,7 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-// Auth routes
+// Authentication routes
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'authenticate'])->name('authenticate');
@@ -30,7 +31,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [AuthController::class, 'store'])->name('register.store');
 });
 
-// Protected routes
+// Protected routes (Hanya untuk pengguna yang sudah login)
 Route::middleware('auth')->group(function () {
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -38,24 +39,29 @@ Route::middleware('auth')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
-    // Kategori
+    // Manajemen Kategori
     Route::resource('kategori', KategoriController::class);
     Route::put('/kategori/{kategori}/soft-delete', [KategoriController::class, 'softDelete'])->name('kategori.soft-delete');
     
-    // Barang
+    // Manajemen Barang
     Route::resource('barang', BarangController::class);
     Route::put('/barang/{barang}/soft-delete', [BarangController::class, 'softDelete'])->name('barang.soft-delete');
     
-    // Karyawan (untuk admin)
+    // Manajemen Karyawan (khusus admin)
+  
         Route::resource('karyawan', KaryawanController::class);
         Route::put('/karyawan/{karyawan}/soft-delete', [KaryawanController::class, 'softDelete'])->name('karyawan.soft-delete');
-    
-    // Peminjaman
+
+
+    // Manajemen Peminjaman
     Route::resource('peminjaman', PeminjamanController::class);
     Route::put('/peminjaman/{peminjaman}/soft-delete', [PeminjamanController::class, 'softDelete'])->name('peminjaman.soft-delete');
     
-    // Pemeliharaan
+    // Manajemen Pemeliharaan Barang
     Route::resource('pemeliharaan', PemeliharaanController::class);
     Route::put('/pemeliharaan/{pemeliharaan}/soft-delete', [PemeliharaanController::class, 'softDelete'])->name('pemeliharaan.soft-delete');
 
+    // Manajemen Pinjam Barang
+    Route::resource('pinjam_barang', PinjamBarangController::class);
+    Route::put('/pinjam_barang/{pinjamBarang}/soft-delete', [PinjamBarangController::class, 'softDelete'])->name('pinjam_barang.soft-delete');
 });
