@@ -39,6 +39,17 @@
                         <label for="departemen" class="block text-gray-700 font-medium mb-2">Departemen</label>
                         <input type="text" name="departemen" id="departemen" value="{{ old('departemen') }}" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
+
+                    <!-- Role Field -->
+                    <div class="mb-4">
+                        <label for="role" class="block text-gray-700 font-medium mb-2">Role</label>
+                        <select name="role" id="role" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Pilih Role</option>
+                            <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                            <option value="karyawan" {{ old('role') == 'karyawan' ? 'selected' : '' }}>Karyawan</option>
+                            <!-- Add more roles as needed -->
+                        </select>
+                    </div>
                     
                     <div class="mb-4">
                         <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
