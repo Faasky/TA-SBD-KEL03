@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-// Hapus use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Karyawan extends Authenticatable
 {
-    // Hapus HasApiTokens dari sini
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
     protected $table = 'karyawans'; 
-    protected $primaryKey = 'id_karyawan'; // Primary Key yang bena
+    protected $primaryKey = 'id_karyawan'; 
     protected $fillable = [
         'nama', 
         'departemen', 
@@ -32,6 +32,8 @@ class Karyawan extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected $dates = ['deleted_at'];
     
     public function peminjamans()
     {

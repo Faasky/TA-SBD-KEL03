@@ -112,25 +112,46 @@ class KaryawanController extends Controller
             ->with('success', 'Karyawan berhasil diperbarui.');
     }
 
-    /**
-     * Soft delete the specified resource.
-     */
-    public function softDelete(Karyawan $karyawan)
-    {
-        $karyawan->update(['is_deleted' => true]);
-        
-        return redirect()->route('karyawan.index')
-            ->with('success', 'Karyawan berhasil dihapus (soft delete).');
-    }
+   /**
+ * Tampilkan data yang di-soft delete.
+ */
+public function trash()
+{
+    $karyawans = Karyawan::onlyTrashed()->where('is_deleted', 1)->latest()->paginate(10);
+    return view('karyawan.trash', compact('karyawans'));
+}
 
-    /**
-     * Permanently delete the specified resource.
-     */
-    public function destroy(Karyawan $karyawan)
-    {
-        $karyawan->delete();
-        
-        return redirect()->route('karyawan.index')
-            ->with('success', 'Karyawan berhasil dihapus secara permanen.');
-    }
+/**
+ * Soft delete data.
+ */
+public function softDelete(Karyawan $karyawan)
+{
+    $karyawan->update(['is_deleted' => true]);
+    $karyawan->delete(); // Ini akan mengisi deleted_at
+
+    return redirect()->route('karyawan.index')->with('success', 'Karyawan berhasil dihapus sementara.');
+}
+
+/**
+ * Restore dari soft delete.
+ */
+public function restore($id)
+{
+    $karyawan = Karyawan::onlyTrashed()->where('id_karyawan', $id)->firstOrFail();
+    $karyawan->update(['is_deleted' => false]);
+    $karyawan->restore();
+
+    return redirect()->route('karyawan.index')->with('success', 'Karyawan berhasil dipulihkan.');
+}
+
+/**
+ * Hard delete permanen.
+ */
+public function destroy($id)
+{
+    $karyawan = Karyawan::onlyTrashed()->where('id_karyawan', $id)->firstOrFail();
+    $karyawan->forceDelete();
+
+    return redirect()->route('karyawan.trash')->with('success', 'Karyawan dihapus secara permanen.');
+}
 }

@@ -18,7 +18,11 @@
             </select>
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Cari</button>
         </form>
-        <a href="{{ route('karyawan.create') }}" class="bg-green-500 text-white px-4 py-2 rounded">Tambah Karyawan</a>
+
+        <div class="flex gap-2">
+            <a href="{{ route('karyawan.trash') }}" class="bg-gray-500 text-white px-4 py-2 rounded">Lihat Trash</a>
+            <a href="{{ route('karyawan.create') }}" class="bg-green-500 text-white px-4 py-2 rounded">Tambah Karyawan</a>
+        </div>
     </div>
     
     <div class="overflow-x-auto">
@@ -35,7 +39,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($karyawans as $karyawan)
+                @forelse ($karyawans as $karyawan)
                 <tr class="border">
                     <td class="border p-2 text-center">{{ $loop->iteration }}</td>
                     <td class="border p-2">{{ $karyawan->nama }}</td>
@@ -45,14 +49,19 @@
                     <td class="text-center">{{ $karyawan->tanggal_bergabung }}</td>
                     <td class="border p-2 text-center flex flex-col md:flex-row gap-2">
                         <a href="{{ route('karyawan.edit', $karyawan->id_karyawan) }}" class="bg-yellow-500 text-white px-3 py-1 rounded text-center">Edit</a>
-                        <form action="{{ route('karyawan.destroy', $karyawan->id_karyawan) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus?');">
+                        
+                        {{-- Soft Delete --}}
+                        <form action="{{ route('karyawan.softDelete', $karyawan->id_karyawan) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus sementara?');">
                             @csrf
-                            @method('DELETE')
                             <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded">Hapus</button>
                         </form>
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                <tr>
+                    <td colspan="7" class="text-center p-4">Tidak ada data karyawan.</td>
+                </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
