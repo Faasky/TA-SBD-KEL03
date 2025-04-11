@@ -19,11 +19,17 @@
 
         <div class="mb-4">
             <label class="block font-medium mb-1">Pilih Barang</label>
-            <select name="id_barang" class="w-full border rounded px-3 py-2">
+            <select name="id_barang" id="barangSelect" class="w-full border rounded px-3 py-2">
+                <option value="">-- Pilih Barang --</option>
                 @foreach ($barangs as $barang)
                     <option value="{{ $barang->id_barang }}">{{ $barang->nama_barang }}</option>
                 @endforeach
             </select>
+        </div>
+
+        <div class="mb-4">
+            <label class="block font-medium mb-1">Kode Aset</label>
+            <input type="text" id="kodeAset" name="kode_aset" class="w-full border rounded px-3 py-2" readonly>
         </div>
 
         <div class="mb-4">
@@ -35,4 +41,26 @@
         <a href="{{ route('pinjam_barang.index') }}" class="text-gray-600 ml-3">Batal</a>
     </form>
 </div>
+
+{{-- JS AJAX --}}
+<script>
+    document.getElementById('barangSelect').addEventListener('change', function () {
+        const idBarang = this.value;
+        const kodeAsetInput = document.getElementById('kodeAset');
+
+        if (idBarang) {
+            fetch(`/barang/${idBarang}/kode-aset`)
+                .then(response => response.json())
+                .then(data => {
+                    kodeAsetInput.value = data.kode_aset || '';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    kodeAsetInput.value = '';
+                });
+        } else {
+            kodeAsetInput.value = '';
+        }
+    });
+</script>
 @endsection

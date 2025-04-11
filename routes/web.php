@@ -45,6 +45,8 @@ Route::middleware('auth')->group(function () {
 
     // Manajemen Barang
     Route::resource('barang', BarangController::class);
+    Route::get('/barang/{id}/kode-aset', [BarangController::class, 'getKodeAset']);
+
     Route::put('/barang/{barang}/soft-delete', [BarangController::class, 'softDelete'])->name('barang.soft-delete');
 
     // Manajemen Karyawan (khusus admin)

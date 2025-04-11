@@ -155,4 +155,16 @@ class BarangController extends Controller
         return redirect()->route('barang.index')
             ->with('success', 'Barang berhasil dihapus secara permanen.');
     }
+
+    public function getKodeAset($id)
+{
+    $barang = Barang::find($id);
+
+    if (!$barang) {
+        return response()->json(['kode_aset' => null], 404);
+    }
+
+    return response()->json(['kode_aset' => $barang->kode_aset]);
+}
+
 }

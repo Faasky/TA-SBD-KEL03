@@ -47,6 +47,7 @@
                     <tr class="bg-gray-200">
                         <th class="border px-4 py-2">No</th>
                         <th class="border px-4 py-2">Nama Barang</th>
+                        <th class="border px-4 py-2">Kode Aset</th> 
                         <th class="border px-4 py-2">Kategori</th>
                         <th class="border px-4 py-2">Status</th>
                         <th class="border px-4 py-2">Aksi</th>
@@ -57,6 +58,7 @@
                         <tr class="hover:bg-gray-100">
                             <td class="border px-4 py-2">{{ $barangs->firstItem() + $index }}</td>
                             <td class="border px-4 py-2">{{ $barang->nama_barang }}</td>
+                            <td class="border px-4 py-2">{{ $barang->kode_aset }}</td>
                             <td class="border px-4 py-2">{{ $barang->kategori->nama_kategori }}</td>
                             <td class="border px-4 py-2">{{ ucfirst($barang->status) }}</td>
                             <td class="border px-4 py-2 space-x-2">
